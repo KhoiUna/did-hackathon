@@ -26,7 +26,7 @@ const Dashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Apartments" subtitle="Pick an apartment" />
+        <Header title="Tenants" subtitle="" />
       </Box>
 
       <Box display="flex" alignItems="center">
@@ -66,7 +66,9 @@ const Dashboard = () => {
               }}
               size="large"
               onClick={handleClick}>
-              <Typography color="text.primary">Verify tenant</Typography>
+              <Typography color="text.primary">
+                Issue VC to Khoi Nguyen
+              </Typography>
             </Button>
           </CardActions>
         </Card>

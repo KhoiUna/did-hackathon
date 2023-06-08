@@ -62,7 +62,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`https://www.khoiuna.info/images/ava.jpg`}
+                  src={`https://thumbs.dreamstime.com/b/red-admin-sign-pc-laptop-vector-illustration-administrator-icon-screen-controller-man-system-box-88756468.jpg`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -78,14 +78,14 @@ const Sidebar = () => {
                     color={colors.grey[100]}
                     fontWeight="bold"
                     sx={{ m: "10px 0 0 0" }}>
-                    Khoi Nguyen
+                    Admin
                   </Typography>
 
                   <Typography
                     sx={{ marginTop: "1rem" }}
                     variant="h5"
                     color={colors.greenAccent[500]}>
-                    <b>Role:</b> Renter
+                    <b>Role:</b> Homey Admin
                   </Typography>
                   <Typography variant="h5" color={colors.greenAccent[500]}>
                     <b>DID:</b> did:key:156sf5asfaf...
