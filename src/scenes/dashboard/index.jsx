@@ -7,8 +7,21 @@ import {
   Typography,
 } from "@mui/material";
 import Header from "../../components/Header";
+import { TrinsicService } from "@trinsic/trinsic";
+const TRINSIC_AUTH_TOKEN =
+  "CiVodHRwczovL3RyaW5zaWMuaWQvc2VjdXJpdHkvdjEvb2Jlcm9uEmcKK3Vybjp0cmluc2ljOndhbGxldHM6elJvQVB6WmRib2FmRnNTYk5YZ05uRlIiOHVybjp0cmluc2ljOmVjb3N5c3RlbXM6bGF1Z2hpbmctbmlnaHRpbmdhbGUtemh3OHd5OXJrZWo3GjCtSnVb8B_zqSRFT6LQsgmA41UsIVBRwNVYo3l6GpqL6E8Ya-_toA-WKuYSHwI-q9oiAA";
 
 const Dashboard = () => {
+  const handleClick = async () => {
+    // instantiate the service with 'authToken' from the response
+    const trinsic = new TrinsicService({
+      authToken: TRINSIC_AUTH_TOKEN,
+    });
+    const infoResponse = await trinsic.wallet().getMyInfo({});
+
+    console.log(infoResponse);
+  };
+
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -51,7 +64,8 @@ const Dashboard = () => {
                 padding: "8px",
                 fontWeight: "bold",
               }}
-              size="large">
+              size="large"
+              onClick={handleClick}>
               <Typography color="text.primary">Verify tenant</Typography>
             </Button>
           </CardActions>

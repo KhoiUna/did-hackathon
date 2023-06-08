@@ -1,34 +1,14 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
-const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  return (
-    <MenuItem
-      active={selected === title}
-      style={{
-        color: colors.grey[100],
-      }}
-      onClick={() => setSelected(title)}
-      icon={icon}>
-      <Typography>{title}</Typography>
-      <Link to={to} />
-    </MenuItem>
-  );
-};
 
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
 
   return (
     <Box
@@ -66,7 +46,7 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px">
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  MENU
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -82,57 +62,38 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
+                  src={`https://www.khoiuna.info/images/ava.jpg`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
-              <Box textAlign="center">
-                <Typography
-                  variant="h2"
-                  color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}>
-                  Ed Roh
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
-                </Typography>
+              <Box
+                sx={{
+                  margin: "auto",
+                  width: "fit-content",
+                  marginTop: "1rem",
+                }}>
+                <Box textAlign="left">
+                  <Typography
+                    variant="h2"
+                    color={colors.grey[100]}
+                    fontWeight="bold"
+                    sx={{ m: "10px 0 0 0" }}>
+                    Khoi Nguyen
+                  </Typography>
+
+                  <Typography
+                    sx={{ marginTop: "1rem" }}
+                    variant="h5"
+                    color={colors.greenAccent[500]}>
+                    <b>Role:</b> Renter
+                  </Typography>
+                  <Typography variant="h5" color={colors.greenAccent[500]}>
+                    <b>DID:</b> did:key:156sf5asfaf...
+                  </Typography>
+                </Box>
               </Box>
             </Box>
           )}
-
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}>
-              Data
-            </Typography>
-          </Box>
-          {/* TODO: add Role, DID key */}
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}>
-              <b>DID:</b> did:key:156sf5asfaf...
-            </Typography>
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}>
-              <b>Role:</b> Renter
-            </Typography>
-          </Box>
         </Menu>
       </ProSidebar>
     </Box>
