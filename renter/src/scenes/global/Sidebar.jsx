@@ -62,7 +62,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`https://www.khoiuna.info/images/ava.jpg`}
+                  src={`https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -78,7 +78,7 @@ const Sidebar = () => {
                     color={colors.grey[100]}
                     fontWeight="bold"
                     sx={{ m: "10px 0 0 0" }}>
-                    Khoi Nguyen
+                    John Doe
                   </Typography>
 
                   <Typography
