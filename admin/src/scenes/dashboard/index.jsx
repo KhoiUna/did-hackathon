@@ -8,8 +8,11 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { TrinsicService } from "@trinsic/trinsic";
+
 const TRINSIC_AUTH_TOKEN =
   "CiVodHRwczovL3RyaW5zaWMuaWQvc2VjdXJpdHkvdjEvb2Jlcm9uEmcKK3Vybjp0cmluc2ljOndhbGxldHM6elJvQVB6WmRib2FmRnNTYk5YZ05uRlIiOHVybjp0cmluc2ljOmVjb3N5c3RlbXM6bGF1Z2hpbmctbmlnaHRpbmdhbGUtemh3OHd5OXJrZWo3GjCtSnVb8B_zqSRFT6LQsgmA41UsIVBRwNVYo3l6GpqL6E8Ya-_toA-WKuYSHwI-q9oiAA";
+
+const APARTMENT_ADDRESS = "Chicago 100 Ashby Lane, IL";
 
 const Dashboard = () => {
   const handleClick = async () => {
@@ -17,9 +20,27 @@ const Dashboard = () => {
     const trinsic = new TrinsicService({
       authToken: TRINSIC_AUTH_TOKEN,
     });
-    const infoResponse = await trinsic.wallet().getMyInfo({});
 
-    console.log(infoResponse);
+    const issueRequest = {
+      templateId:
+        "https://schema.trinsic.cloud/laughing-nightingale-zhw8wy9rkej7/tenants-vc-for-homey",
+      valuesJson: JSON.stringify({
+        name: "Khoi Nguyen",
+        email: "thorwaitson@gmail.com",
+        apartmentAddress: APARTMENT_ADDRESS,
+      }),
+    };
+
+    const issueResponse = await trinsic
+      .credential()
+      .issueFromTemplate(issueRequest);
+
+    console.log(JSON.parse(issueResponse.documentJson), null, 2);
+    await trinsic.credential().send({
+      email: "thorwaitson@gmail.com",
+      documentJson: issueResponse.documentJson,
+      sendNotification: true,
+    });
   };
 
   return (
@@ -36,7 +57,10 @@ const Dashboard = () => {
               sx={{ fontSize: 14 }}
               color="text.secondary"
               gutterBottom>
-              Chicago 100 Ashby Lane, IL
+              {APARTMENT_ADDRESS}
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} variant="h4" component="div">
+              Tenant: Khoi Nguyen
             </Typography>
             <Typography variant="h5" component="div">
               March 7-10, 2023
@@ -66,9 +90,7 @@ const Dashboard = () => {
               }}
               size="large"
               onClick={handleClick}>
-              <Typography color="text.primary">
-                Issue VC to Khoi Nguyen
-              </Typography>
+              <Typography color="text.primary">Issue VC to Khoi</Typography>
             </Button>
           </CardActions>
         </Card>
