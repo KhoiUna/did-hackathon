@@ -4,6 +4,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const theme = useTheme();
@@ -91,6 +92,12 @@ const Sidebar = () => {
                     <b>DID:</b> did:key:156sf5asfaf...
                   </Typography>
                 </Box>
+
+                <Link to="/">
+                  <Box sx={{ mt: 2 }}>
+                    <Typography variant="h4">Dashboard</Typography>
+                  </Box>
+                </Link>
               </Box>
             </Box>
           )}

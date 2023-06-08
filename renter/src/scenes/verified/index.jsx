@@ -8,18 +8,28 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { client } from "../../lib/oidcClient";
+import { useEffect, useState } from "react";
 
-const Dashboard = () => {
-  const verify = async () => {
-    try {
-      const req = await client.createSigninRequest({});
-      window.location = req.url;
-    } catch (error) {
-      console.error("Error sign Popup");
-      console.error(error);
-    }
-  };
+const Verified = () => {
+  const [credentialSubject, setCredentialSubject] = useState("");
 
+  useEffect(() => {
+    const handleCallback = () => {
+      const url = window.location.toString();
+
+      client
+        .processSigninResponse(url)
+        .then(function (response) {
+          setCredentialSubject(
+            JSON.stringify(response.vp_token.credentialSubject)
+          );
+        })
+        .catch(function (err) {
+          console.error(err);
+        });
+    };
+    handleCallback();
+  }, []);
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -27,7 +37,14 @@ const Dashboard = () => {
         <Header title="Apartments" subtitle="Pick an apartment" />
       </Box>
       <Box display="flex" alignItems="center">
-        <Card sx={{ minWidth: 300, padding: "1rem" }}>
+        <Card
+          sx={{
+            width: 350,
+            height: 500,
+            overflow: "auto",
+            padding: "1rem",
+            background: "#dcffdc",
+          }}>
           <CardContent sx={{ padding: 0 }}>
             <Typography
               sx={{ fontSize: 14 }}
@@ -59,21 +76,31 @@ const Dashboard = () => {
 
           <CardActions sx={{ padding: 0 }}>
             <Button
-              onClick={verify}
-              id="verify-button"
               sx={{
                 marginTop: "0.5rem",
                 padding: "8px",
                 fontWeight: "bold",
               }}
               size="large">
-              <Typography color="text.primary">Verify tenant</Typography>
+              <Typography color="text.primary">Verified</Typography>
             </Button>
           </CardActions>
+
+          {credentialSubject && (
+            <Box
+              sx={{
+                p: 1,
+                background: "silver",
+                overflow: "auto",
+                borderRadius: "10px",
+              }}>
+              <code>{credentialSubject}</code>
+            </Box>
+          )}
         </Card>
       </Box>
     </Box>
   );
 };
 
-export default Dashboard;
+export default Verified;
