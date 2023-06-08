@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { TrinsicService } from "@trinsic/trinsic";
+import { Toaster, toast } from "react-hot-toast";
 
 const TRINSIC_AUTH_TOKEN =
   "CiVodHRwczovL3RyaW5zaWMuaWQvc2VjdXJpdHkvdjEvb2Jlcm9uEmcKK3Vybjp0cmluc2ljOndhbGxldHM6elJvQVB6WmRib2FmRnNTYk5YZ05uRlIiOHVybjp0cmluc2ljOmVjb3N5c3RlbXM6bGF1Z2hpbmctbmlnaHRpbmdhbGUtemh3OHd5OXJrZWo3GjCtSnVb8B_zqSRFT6LQsgmA41UsIVBRwNVYo3l6GpqL6E8Ya-_toA-WKuYSHwI-q9oiAA";
@@ -35,7 +36,8 @@ const Dashboard = () => {
       .credential()
       .issueFromTemplate(issueRequest);
 
-    console.log(JSON.parse(issueResponse.documentJson), null, 2);
+    toast.success("Successfully issued VC");
+
     await trinsic.credential().send({
       email: "thorwaitson@gmail.com",
       documentJson: issueResponse.documentJson,
@@ -45,6 +47,8 @@ const Dashboard = () => {
 
   return (
     <Box m="20px">
+      <Toaster />
+
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Tenants" subtitle="" />
