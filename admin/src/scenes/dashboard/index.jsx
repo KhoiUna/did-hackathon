@@ -10,16 +10,13 @@ import Header from "../../components/Header";
 import { TrinsicService } from "@trinsic/trinsic";
 import { Toaster, toast } from "react-hot-toast";
 
-const TRINSIC_AUTH_TOKEN =
-  "CiVodHRwczovL3RyaW5zaWMuaWQvc2VjdXJpdHkvdjEvb2Jlcm9uEmcKK3Vybjp0cmluc2ljOndhbGxldHM6elJvQVB6WmRib2FmRnNTYk5YZ05uRlIiOHVybjp0cmluc2ljOmVjb3N5c3RlbXM6bGF1Z2hpbmctbmlnaHRpbmdhbGUtemh3OHd5OXJrZWo3GjCtSnVb8B_zqSRFT6LQsgmA41UsIVBRwNVYo3l6GpqL6E8Ya-_toA-WKuYSHwI-q9oiAA";
-
 const APARTMENT_ADDRESS = "Chicago 100 Ashby Lane, IL";
 
 const Dashboard = () => {
   const handleClick = async () => {
     // instantiate the service with 'authToken' from the response
     const trinsic = new TrinsicService({
-      authToken: TRINSIC_AUTH_TOKEN,
+      authToken: 'TRINSIC_AUTH_TOKEN',
     });
 
     const issueRequest = {
